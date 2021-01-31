@@ -1,0 +1,1 @@
+This is repo is the building repository for the react-animated-backgrounds tool.
