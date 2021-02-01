@@ -1,7 +1,11 @@
 import React, {useEffect, useRef} from 'react'
 
 function ImageFader(props) {
-  var{ background, images, width, height, objectFit } = props
+  var { background = 'white', 
+        images = ["https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"], 
+        width = window.width, 
+        height = window.height, 
+        objectFit = "stretch" } = props
   var canvas = useRef(null)
   var context;
   const imageDrawer = new ImageDraw()
@@ -9,11 +13,6 @@ function ImageFader(props) {
   var imageIndex = 1
   var transition = true
   var transitionCount = 0
-
-  useEffect(() => {
-    init()
-    window.requestAnimationFrame(anim)
-  }) 
 
   const init = () => {
     context = canvas.current.getContext('2d');
@@ -24,12 +23,17 @@ function ImageFader(props) {
     setInterval(function(){ 
       transition = true
     }, 10000);
+    window.requestAnimationFrame(anim)
   }
 
   const anim = () => {
     imageDrawer.drawImage()
     window.requestAnimationFrame(anim)
   }
+
+  useEffect(() => {
+    init()
+  }) 
 
   function ImageDraw(initalX, initalY, wait){
       this.x = initalX
@@ -95,9 +99,7 @@ function ImageFader(props) {
         reposition = img.naturalHeight * resizeFactor
         context.drawImage(img, 0, (img.naturalHeight - reposition) / 2, img.naturalWidth, reposition, 0, 0, width, height);
       }
-    }
-    
-    
+    } 
   }
 
   return (
