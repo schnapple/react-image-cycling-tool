@@ -1,6 +1,4 @@
-import CircleGrid from './CircleGrid'
-import CirclingLines from './CirclingLines'
-import RandomCircles from './RandomCircles'
+import ImageFader from './ImageFader'
 export {
- RandomCircles, CircleGrid, CirclingLines
+    ImageFader
 };

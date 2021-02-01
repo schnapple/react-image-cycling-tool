@@ -1,8 +1,8 @@
 {
-    "name": "react_animated_backgrounds",
+    "name": "react_image_cycling_tool",
     "author": "phil lagambino",
     "version": "0.1.0",
-    "description": "Animated backgrounds built with and for react apps",
+    "description": "React component used to cycle throw a series of images seemlessly.",
     "main": "build/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
