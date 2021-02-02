@@ -37,19 +37,19 @@ export default App;
 
 *`background` prop:*
 Background color of the component when an image is either transparent or not present.
-Default: white
+*Default:* white
 
 *`images` prop:*
 A list of image urls to display and cycle through. The component with cycle through these images indefinitely.
-Default: ["https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"] (no images pic)
+*Default:* ["https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"] (no images pic)
 
 *`width` prop:*
-Width of the component. **NOTE** dependent on objectFit this may not be the size of the image
-Default: window.width
+Width of the component, percentage of the window's width, less than or equal to 1. **NOTE** dependent on objectFit this may not be the size of the image
+*Default:* 1
 
 *`height` prop:*
-Height of the component. **NOTE** dependent on objectFit this may not be the size of the image
-Default: window.height
+Height of the component, percentage of the window's height, less than or equal to 1. **NOTE** dependent on objectFit this may not be the size of the image
+*Default:* 1
 
 *`objectFit` prop:*
 ObjectFit determines how the image will fit the larger canvas object.
