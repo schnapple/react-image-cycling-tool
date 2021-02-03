@@ -1,7 +1,7 @@
 {
-    "name": "react_image_cycling_tool",
+    "name": "react-image-cycling-tool",
     "author": "phil lagambino",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "React component used to cycle throw a series of images seemlessly.",
     "main": "build/index.js",
     "scripts": {

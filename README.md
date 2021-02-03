@@ -15,7 +15,7 @@ This tool is used to cycle through an array of images given by the user.
 ### Example
 ```js
 import './App.css';
-import ImageFader from './components/ImageFader'
+import {ImageFader} from './components/ImageFader'
 
 function App() {
   var images = ["imgURL1","imgURL2","imgURL3","imgURL4"]

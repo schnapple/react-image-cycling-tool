@@ -3,8 +3,8 @@ import React, {useEffect, useRef} from 'react'
 function ImageFader(props) {
   var { background = 'white', 
         images = ["https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"], 
-        width = 1, 
-        height = 1, 
+        widthRatio = 1, 
+        heightRatio = 1, 
         objectFit = "stretch" } = props
   var canvas = useRef(null)
   var context;
@@ -16,27 +16,24 @@ function ImageFader(props) {
   var transitionCount = 0
 
   const resizeCanvas = () => {
-    context.canvas.height = window.innerHeight;
-    context.canvas.width = window.innerWidth;
-    height =  window.innerHeight
-    width =  window.innerWidth
-    context.clearRect(0,0,width,height)
+    context.canvas.height = canvas.current.parentNode.offsetHeight * heightRatio;
+    context.canvas.width = canvas.current.parentNode.offsetWidth * widthRatio;
+    context.clearRect(0,0,context.canvas.width,context.canvas.height)
     imageManipulation(curImg)
   }
 
   window.onresize = function() {
     resizeCanvas();
-    console.log(this)
   }
 
   const init = () => {
     context = canvas.current.getContext('2d');
+    context.canvas.height = canvas.current.parentNode.offsetHeight;
+    context.canvas.width = canvas.current.parentNode.offsetWidth;
     context.fillStyle = background;
     context.globalAlpha = .05
     context.lineWidth = 1;
     img.src = images[imageIndex]
-    height =  window.innerHeight * height
-    width =  window.innerWidth * width
     setInterval(function(){ 
       transition = true
     }, 10000);
@@ -63,7 +60,7 @@ function ImageFader(props) {
         }
         if(transitionCount === 25){
           context.globalAlpha = 1
-          context.clearRect(0,0,width,height)
+          context.clearRect(0,0,context.canvas.width,context.canvas.height)
           imageManipulation(img)
           context.globalAlpha = .05
           transitionCount = 0
@@ -89,27 +86,26 @@ function ImageFader(props) {
   }
 
   const naturalImage = (imageVal) => {
-    context.drawImage(imageVal, width/2 - imageVal.naturalWidth/2, height/2 - imageVal.naturalHeight/2, imageVal.naturalWidth, imageVal.naturalHeight);
+    context.drawImage(imageVal, context.canvas.width/2 - imageVal.naturalWidth/2, context.canvas.height/2 - imageVal.naturalHeight/2, imageVal.naturalWidth, imageVal.naturalHeight);
   }
 
   const stretchImage = (imageVal) => {
-    context.drawImage(imageVal, 0, 0, width, height);
+    context.drawImage(imageVal, 0, 0, context.canvas.width, context.canvas.height);
   }
 
   const expandAndCropImage = (imageVal) => {
-    var heightRatio = (imageVal.naturalHeight/height)
-    var widthRatio = (imageVal.naturalWidth/width)
+    var heightRatio = (imageVal.naturalHeight/context.canvas.height)
+    var widthRatio = (imageVal.naturalWidth/context.canvas.width)
     if(heightRatio > widthRatio){
-      var newHeight = height * widthRatio
-      context.drawImage(imageVal, 0, (imageVal.naturalHeight/2)-(newHeight/2), imageVal.width, newHeight, 0, 0, width, height);
+      var newHeight = context.canvas.height * widthRatio
+      context.drawImage(imageVal, 0, (imageVal.naturalHeight/2)-(newHeight/2), imageVal.width, newHeight, 0, 0, context.canvas.width, context.canvas.height);
     } else {
-      var newWidth = width * heightRatio
-      context.drawImage(imageVal, (imageVal.naturalWidth/2)-(newWidth/2), 0, newWidth, imageVal.height, 0, 0, width, height);
+      var newWidth = context.canvas.width * heightRatio
+      context.drawImage(imageVal, (imageVal.naturalWidth/2)-(newWidth/2), 0, newWidth, imageVal.height, 0, 0, context.canvas.width, context.canvas.height);
     } 
-    
   }
   return (
-    <canvas style={{background: background}} ref={canvas} width={window.innerWidth * width} height={window.innerHeight * height}>
+    <canvas id="image-cycling-tool" style={{background: background}} ref={canvas} width={widthRatio} height={heightRatio}>
     </canvas>
   );
 }
