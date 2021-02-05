@@ -2,11 +2,19 @@
 
 A react tool used to cycle through an array of images using HTML5 Canvas.
 
+## [Demo](https://phillagambino.web.app/demo)
+
+
 ## Installation
+
+With NPM:
+
+run `npm install react-image-cycling-tool`.
+
 
 With Github:
 
-Download [react_image_cycling_tool-0.1.0.tgz](https://github.com/schnapple/react-image-cycling-tool/raw/main/react_image_cycling_tool-0.1.0.tgz) and `run npm install <pwd>/react_image_cycling_tool-0.1.0.tgz)`.
+Download [react_image_cycling_tool-0.1.0.tgz](https://github.com/schnapple/react-image-cycling-tool/raw/main/react_image_cycling_tool-0.1.0.tgz) and `run npm install <pwd>/react-image-cycling-tool-1.0.0.tgz)`.
 
 ## Usage
 
